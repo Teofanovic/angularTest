@@ -11,11 +11,13 @@ import { LikeComponent } from "./like.component";
                 </a>
             </div>
             <div class="media-body">
-                <h5 class="mt-0 media-heading">Media heading</h5>
+                <h4 class="mt-0 media-heading">
+                    {{ data.author }} <span class="handle">{{ data.handle }}</span>
+                </h4>
                 {{data.body}}
             </div>
             <div>
-                <like [totalLikes]="data.totalLikes" [isLiked]="data.isLiked"></like>
+                <like [likes]="data.likes" [isLiked]="data.isLiked"></like>
             </div>
         </div>
     `,

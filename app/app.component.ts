@@ -5,6 +5,7 @@ import { FavoriteComponent } from './favorite.component';
 import { LikeComponent } from './like.component';
 import { VoterComponent } from './voter.component';
 import { TweetService } from './tweet.service';
+import { TweetComponent } from './tweet.component';
 
 @Component({
     selector: 'my-app',
@@ -13,7 +14,7 @@ import { TweetService } from './tweet.service';
         <tweet [data]="tweet"></tweet>
     </div>
     `,
-    directives: [FavoriteComponent, LikeComponent, VoterComponent],
+    directives: [TweetComponent],
     providers: [TweetService]
 })
 export class AppComponent {
