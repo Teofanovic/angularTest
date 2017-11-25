@@ -4,25 +4,22 @@ import { AuthorsComponent } from './authors.component';
 import { FavoriteComponent } from './favorite.component';
 import { LikeComponent } from './like.component';
 import { VoterComponent } from './voter.component';
+import { TweetService } from './tweet.service';
 
 @Component({
     selector: 'my-app',
     template: `
-        <voter 
-            [myVote]="post.myVote" 
-            [voteCount]="post.voteCount"
-            (vote)="onVote($event)">
-        </voter>,
+    <div *ngFor="#tweet of tweets">
+        <tweet [data]="tweet"></tweet>
+    </div>
     `,
-    directives: [FavoriteComponent, LikeComponent, VoterComponent]
+    directives: [FavoriteComponent, LikeComponent, VoterComponent],
+    providers: [TweetService]
 })
 export class AppComponent {
-    post = {
-        voteCount: 10,
-        myVote: 0
-    };
+    tweets: object[];
 
-    onVote($event) {
-        console.log($event);
+    constructor(tweetService: TweetService) {
+        this.tweets = tweetService.getTweets();
     }
 }

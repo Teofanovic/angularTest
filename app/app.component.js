@@ -1,4 +1,4 @@
-System.register(['angular2/core', './favorite.component', './like.component', './voter.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './favorite.component', './like.component', './voter.component', './tweet.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, favorite_component_1, like_component_1, voter_component_1;
+    var core_1, favorite_component_1, like_component_1, voter_component_1, tweet_service_1;
     var AppComponent;
     return {
         setters:[
@@ -25,25 +25,23 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
             },
             function (voter_component_1_1) {
                 voter_component_1 = voter_component_1_1;
+            },
+            function (tweet_service_1_1) {
+                tweet_service_1 = tweet_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
-                    this.post = {
-                        voteCount: 10,
-                        myVote: 0
-                    };
+                function AppComponent(tweetService) {
+                    this.tweets = tweetService.getTweets();
                 }
-                AppComponent.prototype.onVote = function ($event) {
-                    console.log($event);
-                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <voter \n            [myVote]=\"post.myVote\" \n            [voteCount]=\"post.voteCount\"\n            (vote)=\"onVote($event)\">\n        </voter>,\n    ",
-                        directives: [favorite_component_1.FavoriteComponent, like_component_1.LikeComponent, voter_component_1.VoterComponent]
+                        template: "\n    <div *ngFor=\"#tweet of tweets\">\n        <tweet [data]=\"tweet\"></tweet>\n    </div>\n    ",
+                        directives: [favorite_component_1.FavoriteComponent, like_component_1.LikeComponent, voter_component_1.VoterComponent],
+                        providers: [tweet_service_1.TweetService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [tweet_service_1.TweetService])
                 ], AppComponent);
                 return AppComponent;
             }());
